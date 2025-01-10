@@ -1,0 +1,33 @@
+##### GENES #####
+# Gets genes from these GO-BP enriched terms only to input in Cytoscape
+## UP
+tail -n+2 bubblePlot_table.tsv | grep -w "UP" | cut -f6 | sed 's/  /,/g' | sed 's/ //g' | tr "," "\n" | sort | uniq > genes_UP_NOVA1-ArAr-30uM_vs_CTRL.tsv
+
+## DOWN
+tail -n+2 bubblePlot_table.tsv | grep -w "DOWN" | cut -f6 | sed 's/  /,/g' | sed 's/ //g' | tr "," "\n" | sort | uniq > genes_DOWN_NOVA1-ArAr-30uM_vs_CTRL.tsv
+#################
+
+##### METADATA #####
+# Gets metadata info (L2FC & FDR) for these genes
+## UP
+cut -f2,4,8 ../final_DEG-UP_table_NOVA1-ArAr-30_vs_CTRL.tsv > metadata_UP_NOVA1-ArAr-30uM_vs_CTRL.tsv
+grep -w -f genes_UP_NOVA1-ArAr-30uM_vs_CTRL.tsv metadata_UP_NOVA1-ArAr-30uM_vs_CTRL.tsv | grep -v "\-AS1" | sort > tmp; mv tmp metadata_UP_NOVA1-ArAr-30uM_vs_CTRL.tsv
+
+## DOWN
+cut -f2,4,8 ../final_DEG-DOWN_table_NOVA1-ArAr-30_vs_CTRL.tsv > metadata_DOWN_NOVA1-ArAr-30uM_vs_CTRL.tsv
+grep -w -f genes_DOWN_NOVA1-ArAr-30uM_vs_CTRL.tsv metadata_DOWN_NOVA1-ArAr-30uM_vs_CTRL.tsv | grep -v "\-AS1" | sort > tmp; mv tmp metadata_DOWN_NOVA1-ArAr-30uM_vs_CTRL.tsv
+####################
+
+##### CYTOSCAPE #####
+# Prints info for Cytoscape
+cut -f2,3,7 bubblePlot_table.tsv | sort | uniq -c | sort -n | grep -v "Group"
+#grep "XXX" bubblePlot_table.tsv | cut -f2,3,6,7
+
+## UP
+#grep "XXX" bubblePlot_table.tsv | grep -w "UP" | cut -f6 | sed 's/  /,/g' | sed 's/ //g' | tr "," "\n" | sort | uniq
+grep "XXX" bubblePlot_table.tsv | grep -w "UP" | cut -f6 | sed 's/  /,/g' | sed 's/ //g' | tr "," "\n" | sort | uniq | tr "\n" " " | sed 's/ $//' && echo  # to Cytoscape search bar
+
+## DOWN
+#grep "XXX" bubblePlot_table.tsv | grep -w "DOWN" | cut -f6 | sed 's/  /,/g' | sed 's/ //g' | tr "," "\n" | sort | uniq
+grep "XXX" bubblePlot_table.tsv | grep -w "DOWN" | cut -f6 | sed 's/  /,/g' | sed 's/ //g' | tr "," "\n" | sort | uniq | tr "\n" " " | sed 's/ $//' && echo  # to Cytoscape search bar
+#####################

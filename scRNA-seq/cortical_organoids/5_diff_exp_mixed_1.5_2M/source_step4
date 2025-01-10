@@ -1,0 +1,4 @@
+#Filter only brain-related GO-BP terms #########################################################
+head -n1 enrichment_GO-BP.txt > brain_enrichment_GO-BP.txt
+grep "brain\|neuro\|nervous\|cerebellar\|nerve\|axon\|synap\|glia\|learning\|memory\|cognition\|behavior\|astrocyte\|cortex\|dendrite\|sensory\|diencephalon\|spinal cord\|equilibrioception\|gliogenesis\|hypothalamus\|innervation\|neural\|oligodendrocyte\|dendritic\|telencephalon" enrichment_GO-BP.txt | \
+ grep -v "axoneme" | grep -v "cell recognition" | grep -v "cell cortex" | grep -v "cardiac" >> brain_enrichment_GO-BP.txt

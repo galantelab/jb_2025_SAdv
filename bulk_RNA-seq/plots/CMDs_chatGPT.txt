@@ -1,0 +1,12 @@
+# This first command must go with the list in the same message
+1) These are IDs and names of Gene Ontology terms, specifically Biological Processes. Return a filtered list of 10 terms in this same format and only having these terms I provided. Do not add terms that are not included in this list! Focus only on terms directly related to brain, neuron and glia cells, synapses, blood-brain barrier, nervous system, neurodevelopment, learning, memory, emotion, motor skills, speech, and neurological disorders
+# Check if the filtered terms returned are, in fact, in the initial list
+2) Give me the IDs list in one line and separated by "\|"
+# Manually inspect the returned filtered list to see if we should ask chatGPT to change anything
+3) Change "" and "" to "" and ""
+# Get back the list in the nice table format
+4) Give me back the complete list in the original table format
+# Check the groups to see if there are no extra terms and if a term is not duplicated
+5) Now, organize these filtered terms into 2 or 3 major groups, as long as they have a minimum of 3 terms. One term in one group must not be also in another group
+# Check if the final table is tab-delimited
+6) Finally, add this final major group information into the "TermID" and "Name" tab-delimited table. The column names must be "ID", "Pathway" and "Group"

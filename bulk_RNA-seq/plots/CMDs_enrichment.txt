@@ -1,0 +1,60 @@
+# Gets gene symbols to input in ShinyGO
+## UP
+tail -n+2 final_DEG-UP_table_NOVA1-ArAr-30_vs_CTRL.tsv | cut -f2 | sort | uniq
+## DOWN
+tail -n+2 final_DEG-DOWN_table_NOVA1-ArAr-30_vs_CTRL.tsv | cut -f2 | sort | uniq
+
+##### SHINYGO #####
+# Converts CSV to TSV getting only GO IDs and FDR COLs for REVIGO
+## UP
+mv ShinyGO/enrichment_all.csv ShinyGO/enrichment_all.UP.csv; cut -f1-5 -d"," ShinyGO/enrichment_all.UP.csv > ShinyGO/tmp; tr "," "\t" < ShinyGO/tmp > ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.UP.tsv; rm ShinyGO/tmp
+## DOWN
+mv ShinyGO/enrichment_all.csv ShinyGO/enrichment_all.DOWN.csv; cut -f1-5 -d"," ShinyGO/enrichment_all.DOWN.csv > ShinyGO/tmp; tr "," "\t" < ShinyGO/tmp > ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.DOWN.tsv; rm ShinyGO/tmp
+
+# Takes GO IDs (not names) and FDR COLs separately and merging them again inverting the order
+## UP
+cut -f5 ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.UP.tsv | tail -n+2 | cut -f1 -d" " > ShinyGO/GO-BP_IDs.txt
+cut -f1 ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.UP.tsv | tail -n+2 > ShinyGO/GO-BP_FDR.txt
+paste -d"\t" ShinyGO/GO-BP_IDs.txt ShinyGO/GO-BP_FDR.txt > ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.UP.reduced.tsv; rm ShinyGO/GO-BP_IDs.txt ShinyGO/GO-BP_FDR.txt
+## DOWN
+cut -f5 ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.DOWN.tsv | tail -n+2 | cut -f1 -d" " > ShinyGO/GO-BP_IDs.txt
+cut -f1 ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.DOWN.tsv | tail -n+2 > ShinyGO/GO-BP_FDR.txt
+paste -d"\t" ShinyGO/GO-BP_IDs.txt ShinyGO/GO-BP_FDR.txt > ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.DOWN.reduced.tsv; rm ShinyGO/GO-BP_IDs.txt ShinyGO/GO-BP_FDR.txt
+
+# Removes extra quotes
+## UP
+sed -i 's/"//g' ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.UP.reduced.tsv
+## DOWN
+sed -i 's/"//g' ShinyGO/enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.DOWN.reduced.tsv
+
+# Selects only significant terms
+cd ShinyGO/
+## UP
+Rscript -e 'library(dplyr); read.table("enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.UP.reduced.tsv", header=F, sep="\t") %>% subset(V2 <= 0.05) %>% write.table(file="enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.UP.reduced.filtered.tsv", sep="\t", row.names=F, col.names=F, quote=F)'
+## DOWN
+Rscript -e 'library(dplyr); read.table("enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.DOWN.reduced.tsv", header=F, sep="\t") %>% subset(V2 <= 0.05) %>% write.table(file="enrichment_all_NOVA1-ArAr-30uM_vs_CTRL.DOWN.reduced.filtered.tsv", sep="\t", row.names=F, col.names=F, quote=F)'
+cd ../
+##### END #####
+
+##### REVIGO #####
+# Selects only GO-BP IDs and Pathway names from REVIGO reduced to ChatGPT
+## UP
+mv REVIGO/Revigo_BP_OnScreenTable.tsv REVIGO/Revigo_BP_OnScreenTable.UP.tsv; cut -f1-2 REVIGO/Revigo_BP_OnScreenTable.UP.tsv > REVIGO/tmp; mv REVIGO/tmp REVIGO/Revigo_NOVA1-ArAr-30uM_vs_CTRL.UP.tsv
+## DOWN
+mv REVIGO/Revigo_BP_OnScreenTable.tsv REVIGO/Revigo_BP_OnScreenTable.DOWN.tsv; cut -f1-2 REVIGO/Revigo_BP_OnScreenTable.DOWN.tsv > REVIGO/tmp; mv REVIGO/tmp REVIGO/Revigo_NOVA1-ArAr-30uM_vs_CTRL.DOWN.tsv
+##### END #####
+
+##### CHATGPT #####
+# Executes these orders in chatGPT
+chatGPT/CMDs.txt
+##### END #####
+
+##### BUBBLE PLOT #####
+# Recovers all needed info of chatGPT output from the raw ShinyGO (after REVIGO) output for Bubble Plot
+## UP
+tail -n+2 chatGPT/chatGPT_NOVA1-ArAr-30uM_vs_CTRL.UP.tsv | cut -f1 | xargs -I {} grep "{}" ShinyGO/enrichment_all.UP.csv | cut -f1,4,5,7 -d"," | tr "," "\t" > BubblePlot/final_NOVA1-ArAr-30uM_vs_CTRL.UP.tsv
+echo -e "FDR\tFold_Enrichment\tPathway\tGenes" | cat - BubblePlot/final_NOVA1-ArAr-30uM_vs_CTRL.UP.tsv > BubblePlot/tmp; mv BubblePlot/tmp BubblePlot/final_NOVA1-ArAr-30uM_vs_CTRL.UP.tsv
+## DOWN
+tail -n+2 chatGPT/chatGPT_NOVA1-ArAr-30uM_vs_CTRL.DOWN.tsv | cut -f1 | xargs -I {} grep "{}" ShinyGO/enrichment_all.DOWN.csv | cut -f1,4,5,7 -d"," | tr "," "\t" > BubblePlot/final_NOVA1-ArAr-30uM_vs_CTRL.DOWN.tsv
+echo -e "FDR\tFold_Enrichment\tPathway\tGenes" | cat - BubblePlot/final_NOVA1-ArAr-30uM_vs_CTRL.DOWN.tsv > BubblePlot/tmp; mv BubblePlot/tmp BubblePlot/final_NOVA1-ArAr-30uM_vs_CTRL.DOWN.tsv
+##### END #####
