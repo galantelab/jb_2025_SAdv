@@ -41,46 +41,47 @@ The pipeline was developed using the following tools and packages. Ensure that t
 
 <details open="open">
 
-    <b>Python Packages:</b>
+    <summary><b>Python Packages:</b></summary>
 
-	<li>&rarr; Kallisto-Bustools</li>
+&rarr; Kallisto-Bustools
+</details>
 
-    <b>R Packages:</b>
+<details open="open">
+    <summary><b>R Packages:</b></summary>
 
-	<li>&rarr; DeSeq2</li>
+&rarr; DeSeq2
 
-	<li>&rarr; tximport</li>
+&rarr; tximport
 
-	<li>&rarr; readr</li>
+&rarr; readr
 
-	<li>&rarr; icesTAF</li>
+&rarr; icesTAF
 
-	<li>&rarr; Seurat (version 5.1.0)</li>
+&rarr; Seurat (version 5.1.0)
 
-	<li>&rarr; tidyverse (version 2.0.0)</li>
+&rarr; tidyverse (version 2.0.0)
 
-	<li>&rarr; scDblFinder (version 1.16.0)</li>
+&rarr; scDblFinder (version 1.16.0)
 
-	<li>&rarr; RColorBrewer (version 1.1.3)</li>
+&rarr; RColorBrewer (version 1.1.3)
 
-	<li>&rarr; ggplot2</li>
+&rarr; ggplot2
 
-	<li>&rarr; ggtext</li>
+&rarr; ggtext
 
-	<li>&rarr; ggnewscale</li>
+&rarr; ggnewscale
 
-	<li>&rarr; forcats</li>
+&rarr; forcats
 
-	<li>&rarr; patchwork</li>
+&rarr; patchwork
 
-	<li>&rarr; Cairo</li>
+&rarr; Cairo
 
-	<li>&rarr; extrafont</li>
+&rarr; extrafont
 
-	<li>&rarr; ggpubr</li>
+&rarr; ggpubr
 
-	<li>&rarr; ggrepel</li>
-   <ol>
+&rarr; ggrepel
 </details>
 
 <!-- REPOSITORY STRUCTURE -->
