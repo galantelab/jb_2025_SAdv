@@ -34,7 +34,6 @@ The pipeline was developed using the following tools and packages. Ensure that t
 &rarr; Bash
 
 &rarr; Python3
-
 &rarr; R (version 4.0 or later)
 </details>
 
