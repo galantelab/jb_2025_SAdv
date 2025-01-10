@@ -30,8 +30,8 @@
 The pipeline was developed using the following tools and packages. Ensure that these versions are installed before running the scripts.
 
 <details open="open">
-    <b>Language</b>
-
+    <summary><b>Language</b></summary>
+    <ol>
 	<li>&rarr; Bash</li>
 
 	<li>&rarr; Python3</li>
@@ -77,6 +77,7 @@ The pipeline was developed using the following tools and packages. Ensure that t
 	<li>&rarr; ggpubr</li>
 
 	<li>&rarr; ggrepel</li>
+   <ol>
 </details>
 
 <!-- REPOSITORY STRUCTURE -->
