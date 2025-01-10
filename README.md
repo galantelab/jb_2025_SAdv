@@ -31,7 +31,6 @@ The pipeline was developed using the following tools and packages. Ensure that t
 
 <details open="open">
     <b>Language</b>
-    <ol>
 	&rarr; Bash
 
 	&rarr; Python3
@@ -77,7 +76,6 @@ The pipeline was developed using the following tools and packages. Ensure that t
 	&rarr; ggpubr
 
 	&rarr; ggrepel
-    </ol>
 </details>
 
 <!-- REPOSITORY STRUCTURE -->
