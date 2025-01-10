@@ -29,7 +29,7 @@
 ## Requirements
 The pipeline was developed using the following tools and packages. Ensure that these versions are installed before running the scripts.
 
-<details open="open">
+<details open="close">
     <summary><b>Language</b></summary>
 
 &rarr; Bash
@@ -39,14 +39,13 @@ The pipeline was developed using the following tools and packages. Ensure that t
 &rarr; R (version 4.0 or later)
 </details>
 
-<details open="open">
-
+<details open="close">
     <summary><b>Python Packages:</b></summary>
 
 &rarr; Kallisto-Bustools
 </details>
 
-<details open="open">
+<details open="close">
     <summary><b>R Packages:</b></summary>
 
 &rarr; DeSeq2
