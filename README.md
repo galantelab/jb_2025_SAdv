@@ -31,9 +31,19 @@ The pipeline was developed using the following tools and packages. Ensure that t
 
 <b>Language</b>
 
+&rarr; Bash
+
+&rarr; Python3
+
 &rarr; R (version 4.0 or later)
 
+<b>Python Packages:</b>
+
+&rarr; Kallisto-Bustools
+
 <b>R Packages:</b>
+
+&rarr; DeSeq2
 
 &rarr; Seurat (version 5.1.0)
 
@@ -50,36 +60,71 @@ The pipeline was developed using the following tools and packages. Ensure that t
 The repository is organized as follows:
 ```bash
 /jb_2025_SAdv
-│
-├── /scRNA_cortical               # Scripts for scRNA-Seq from cortical organoids 
-│   ├── /diff_exp                 # Scripts for differential expression analysis
-│   │   ├── /analysis_clusterProfiler
-│   │   │   ├── script_1.sh       # Create symbolic links to unfiltered and diff exp genes exclusive per cell population
-│   │   │   ├── script_2.R        # Run GO-BP enrichment analyses
-│   │   │   ├── script_3.sh       # Filter only brain-related GO-BP terms
-│   │   │   └── script_4.R        # Make bubbleplots without REVIGO filtering
-│   │   ├── script_1.sh           # Get number of diff exp genes (log2FC > 0.1 & FDR < 0.05)
-│   │   ├── script_2.R            # Filter differentially expressed protein-coding genes (|log2FC| > 0.1 & adj.pvalue < 0.05)
-│   │   └── script_3.R            # Plot Venn diagrams with intersections between cell populations
-│   ├── script_1.R                # Run QC filtering
-│   ├── script_2.R                # Normalize samples
-│   ├── script_3.R                # Integrate all samples. (Based on [PMID: 36179669] publication)
-│   ├── script_4.R                # Integrate reference datasets (1.5 + 2 months). (Based on [PMID: 36179669] publication)
-│   ├── script_5.R                # Map and annotate integrated dataset (1.5 + 2 months) with reference cell types. (Based on [PMID: 36179669] publication)
-│   ├── script_6.R                # Plots
-│   └── script_7.R                # Differential Expression
-│
-├── /scRNA_thalamic               # Scripts for scRNA-Seq from thalamic organoids
-│   ├── script_1.R                # Run QC filtering
-│   ├── script_2.R                # Normalize samples
-│   ├── script_3.R                # Integrate all samples. (Based on [PMID: 37824646] publication)
-│   ├── script_4.R                # Map and annotate integrated dataset with reference cell types. (Based on [PMID: 37824646] publication)
-│   └── script_5.R                # Plots
-│
-└── /bulk_organoids               # Scripts for bulk RNA-Seq
-    ├── script_1.R                # Description of what this script does
-    ├── script_2.R                # Description of what this script does
-    └── ...
+├── bulk_RNA-seq # Scripts for bulk RNA-Seq
+│   ├── degs # Differential expression analysis
+│   │   ├── automate_MASTER_call.sh
+│   │   ├── source_step0_MASTER.sh
+│   │   ├── source_step1_TXimport.sh
+│   │   ├── source_step2_DESeq2.sh
+│   │   ├── st1_TXimport.R
+│   │   ├── st2_DESeq2.R
+│   │   ├── st3_Filters.R
+│   │   └── support
+│   │       ├── edit_PC-Gene_MAP.R
+│   │       ├── get_DEG_table.R
+│   │       ├── get_Union-DEG.R
+│   │       └── merge_TXimport_PC-GeneMAP.R
+│   ├── metadata
+│   │   ├── map_gene_IDs.PC.tsv
+│   │   ├── map_gene_IDs.raw.tsv
+│   │   ├── map_gene_IDs.tsv
+│   │   └── mapID2GROUP.batch2.tsv
+│   ├── metrics
+│   │   └── MultiQC.html
+│   ├── plots
+│   │   ├── automate_PCA_call.sh
+│   │   ├── CMDs_chatGPT.txt
+│   │   ├── CMDs_cytoscape.txt
+│   │   ├── CMDs_enrichment.txt
+│   │   ├── make_bubblePlot.R
+│   │   ├── make_PCA_COUNTS.R
+│   │   └── make_VolcanoPlot.R
+│   └── pre-processing
+│       ├── source_step0_MASTER.sh
+│       ├── st0_Metrics.sh
+│       └── st1_Kallisto.sh
+├── LICENSE
+├── README.md
+└── scRNA-seq # Scripts for scRNA-Seq
+    ├── cortical_organoids # Scripts for scRNA-Seq from cortical organoids analysis
+    │   ├── 5_diff_exp_mixed_1.5_2M # Scripts for differential expression analysis
+    │   │   ├── source_step1.R
+    │   │   ├── source_step2.R
+    │   │   ├── source_step3.R
+    │   │   ├── source_step4
+    │   │   └── source_step5.R
+    │   ├── list_dirs.txt
+    │   ├── map_genes.txt
+    │   ├── sample_groups.txt
+    │   ├── source_step1.R
+    │   ├── source_step2.R
+    │   ├── source_step3.R
+    │   ├── source_step4.R
+    │   ├── source_step5.R
+    │   ├── source_step6.R
+    │   └── source_step7.R
+    ├── Organoid_Markers.tsv
+    ├── source_step0_MASTER.sh
+    ├── st1_KB_Ref.sh # Build Index - kb
+    ├── st2_KB_Count.geneNoMM.sh # Process Data - kb
+    └── thalamic_organoids # Scripts for scRNA-Seq from thalamic organoids analysis
+        ├── list_dirs.txt
+        ├── source_step1.R
+        ├── source_step2.R
+        ├── source_step3.R
+        ├── source_step4.R
+        ├── source_step5.R
+        └── source_step6.R
 ```
 
 <!-- DATA -->
