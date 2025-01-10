@@ -31,13 +31,9 @@ The pipeline was developed using the following tools and packages. Ensure that t
 
 <details open="open">
     <summary><b>Language</b></summary>
-    <ol>
-	<li>&rarr; Bash</li>
-
 	<li>&rarr; Python3</li>
 
 	<li>&rarr; R (version 4.0 or later)</li>
-    </ol>
 <details open="open">
 
     <b>Python Packages:</b>
