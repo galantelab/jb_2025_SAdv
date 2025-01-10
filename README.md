@@ -29,29 +29,56 @@
 ## Requirements
 The pipeline was developed using the following tools and packages. Ensure that these versions are installed before running the scripts.
 
-<b>Language</b>
+<details open="open">
+    <b>Language</b>
+    <ol>
+	&rarr; Bash
 
-&rarr; Bash
+	&rarr; Python3
 
-&rarr; Python3
+	&rarr; R (version 4.0 or later)
 
-&rarr; R (version 4.0 or later)
+    <b>Python Packages:</b>
 
-<b>Python Packages:</b>
+	&rarr; Kallisto-Bustools
 
-&rarr; Kallisto-Bustools
+    <b>R Packages:</b>
 
-<b>R Packages:</b>
+	&rarr; DeSeq2
 
-&rarr; DeSeq2
+	&rarr; tximport
 
-&rarr; Seurat (version 5.1.0)
+	&rarr; readr
 
-&rarr; tidyverse (version 2.0.0)
+	&rarr; icesTAF
 
-&rarr; scDblFinder (version 1.16.0)
+	&rarr; Seurat (version 5.1.0)
 
-&rarr; RColorBrewer (version 1.1.3)
+	&rarr; tidyverse (version 2.0.0)
+
+	&rarr; scDblFinder (version 1.16.0)
+
+	&rarr; RColorBrewer (version 1.1.3)
+
+	&rarr; ggplot2
+
+	&rarr; ggtext
+
+	&rarr; ggnewscale
+
+	&rarr; forcats
+
+	&rarr; patchwork
+
+	&rarr; Cairo
+
+	&rarr; extrafont
+
+	&rarr; ggpubr
+
+	&rarr; ggrepel
+    </ol>
+</details>
 
 <!-- REPOSITORY STRUCTURE -->
 ## Repository Structure
