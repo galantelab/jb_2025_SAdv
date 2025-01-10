@@ -31,9 +31,11 @@ The pipeline was developed using the following tools and packages. Ensure that t
 
 <details open="open">
     <summary><b>Language</b></summary>
+
 &rarr; Bash
 
 &rarr; Python3
+
 &rarr; R (version 4.0 or later)
 </details>
 
